@@ -23,10 +23,6 @@ func update_current_zoom(zoom_level):
 	current_zoom_level = zoom_level
 	set_zoom(Vector2(current_zoom_level, current_zoom_level))
 
-func try_set_zoom(zoom_level):
-	if minimum_zoom_level <= zoom_level and zoom_level <= maximum_zoom_level:
-		set_zoom(Vector2(zoom_level, zoom_level))
-
 func _ready() -> void:
 	try_set_zoom(current_zoom_level)
 
