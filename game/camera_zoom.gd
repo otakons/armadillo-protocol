@@ -30,7 +30,6 @@ func try_set_zoom(zoom_level):
 func _ready() -> void:
 	try_set_zoom(current_zoom_level)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _input(event):
 	if event.is_action_pressed("ui_zoom_in"):
 		increase_zoom()
