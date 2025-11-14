@@ -24,7 +24,7 @@ func update_current_zoom(zoom_level):
 	set_zoom(Vector2(current_zoom_level, current_zoom_level))
 
 func _ready() -> void:
-	try_set_zoom(current_zoom_level)
+	update_current_zoom(current_zoom_level)
 
 func _input(event):
 	if event.is_action_pressed("ui_zoom_in"):
