@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ch4nj0h07wrtt"]
+[gd_scene load_steps=6 format=3 uid="uid://ch4nj0h07wrtt"]
 
 [ext_resource type="Script" path="res://player_character.gd" id="1_5kojs"]
 [ext_resource type="Texture2D" uid="uid://dviv5gj26sdi" path="res://assets/player.png" id="2_hm0gl"]
 [ext_resource type="Script" path="res://camera_zoom.gd" id="3_nlxdy"]
+[ext_resource type="PackedScene" uid="uid://b5pdo2fgujrj0" path="res://weapon.tscn" id="4_35ins"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8k6ns"]
 radius = 7.0
@@ -24,3 +25,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("3_nlxdy")
 zoom_sensitivity = 0.2
+
+[node name="Weapon" parent="." instance=ExtResource("4_35ins")]
+position = Vector2(0, 1)
