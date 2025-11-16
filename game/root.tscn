@@ -5,3 +5,4 @@
 [node name="root" type="Node2D"]
 
 [node name="map" parent="." instance=ExtResource("1_2thnd")]
+texture_filter = 1
