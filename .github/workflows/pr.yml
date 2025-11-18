@@ -1,0 +1,42 @@
+name: Pull Request
+concurrency: preview-${{ github.ref }}
+on: pull_request
+jobs:
+  build:
+    name: Build
+    strategy:
+      matrix:
+        include:
+          - platform: linux
+          - platform: web
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Build game
+        run: nix build .#${{ matrix.platform }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-${{ matrix.platform }}
+          path: result
+
+  publish-preview:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Publish html5 preview
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download web artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts-web
+          path: ./build/
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./build/
