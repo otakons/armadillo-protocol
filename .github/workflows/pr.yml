@@ -8,7 +8,7 @@ jobs:
         include:
           - platform: linux
           - platform: web
-    runs-on: x86_64
+    runs-on: ubuntu-latest
     env:
       DOCKER_BUILDKIT: 1
     steps:
