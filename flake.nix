@@ -18,6 +18,10 @@
       perSystem = { config, self', inputs', pkgs, system, ... }:
         let
           godotVersion = pkgs.godotPackages;
+          coi-serviceworker = pkgs.fetchurl {
+            url = "https://raw.githubusercontent.com/gzuidhof/coi-serviceworker/7b1d2a092d0d2dd2b7270b6f12f13605de26f214/coi-serviceworker.js";
+            sha256 = "sha256-6Xu6xgFzItSKpUpbx85HPHJaS3N2/yRQAuC6ccPc3X4=";
+          };
         in
         {
           packages.linux = pkgs.stdenv.mkDerivation {
@@ -65,6 +69,9 @@
 
               mkdir -p $out/bin
               cp work/build/* $out/
+
+              cp ${coi-serviceworker} $out/coi-serviceworker.js
+              sed -i '/<\/body>/i <script src="coi-serviceworker.js"></script>' $out/game.html
             '';
           };
 
