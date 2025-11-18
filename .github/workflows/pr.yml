@@ -1,4 +1,5 @@
 name: Pull Request
+concurrency: preview-${{ github.ref }}
 on: pull_request
 jobs:
   build:
@@ -24,24 +25,17 @@ jobs:
           name: build-artifacts-${{ matrix.platform }}
           path: result
 
-      - name: Upload pages artifact for web
-        uses: actions/upload-pages-artifact@v3
-        id: deployment
-        if: ${{ matrix.platform == 'web' }}
-        with:
-          path: result/
-
   publish-preview:
     needs: build
     runs-on: ubuntu-latest
     name: Publish html5 preview
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Download web artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts-web
+          path: ./build/
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./build/
