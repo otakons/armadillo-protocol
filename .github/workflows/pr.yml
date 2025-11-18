@@ -1,0 +1,25 @@
+name: Pull Request
+on: pull_request
+jobs:
+  build:
+    name: Build
+    strategy:
+      matrix:
+        include:
+          - platform: linux
+          - platform: web
+    runs-on: x86_64
+    env:
+      DOCKER_BUILDKIT: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Build game
+        run: nix build .#${{ matrix.platform }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-${{ matrix.platform }}
+          path: result
