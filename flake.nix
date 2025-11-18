@@ -44,6 +44,29 @@
               install -m 644 work/build/armadillo-protocol.pck $out/bin/armadillo-protocol.pck
             '';
           };
+          packages.web = pkgs.stdenv.mkDerivation {
+            pname = "armadillo-protocol";
+            version = "0.1.0";
+            src = ./game;
+
+            buildInputs = with godotVersion; [ godot ];
+
+            buildPhase = ''
+              export HOME=$TMPDIR
+
+              mkdir -p work/build
+              cp -r $src/* work/
+              mkdir -p $HOME/.local/share/godot
+
+              ln -s ${godotVersion.export-templates-bin}/share/godot/export_templates \
+                $HOME/.local/share/godot/
+
+              godot --headless --export-release "Web" --path work
+
+              mkdir -p $out/bin
+              cp work/build/* $out/
+            '';
+          };
 
           devShells.default = pkgs.mkShell {
             packages = with godotVersion; [
