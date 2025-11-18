@@ -1,22 +1,42 @@
-[gd_scene load_steps=6 format=3 uid="uid://ch4nj0h07wrtt"]
+[gd_scene load_steps=10 format=3 uid="uid://ch4nj0h07wrtt"]
 
 [ext_resource type="Script" path="res://player_character.gd" id="1_5kojs"]
-[ext_resource type="Texture2D" uid="uid://dviv5gj26sdi" path="res://assets/player.png" id="2_hm0gl"]
+[ext_resource type="Texture2D" uid="uid://bouh618yq40xl" path="res://assets/player-frame1.png" id="2_hamdl"]
+[ext_resource type="Texture2D" uid="uid://dedln02rqfnnd" path="res://assets/player-frame2.png" id="3_kpnjr"]
 [ext_resource type="Script" path="res://camera_zoom.gd" id="3_nlxdy"]
 [ext_resource type="PackedScene" uid="uid://b5pdo2fgujrj0" path="res://weapon.tscn" id="4_35ins"]
+[ext_resource type="Texture2D" uid="uid://m8nba71ir8kr" path="res://assets/player-frame3.png" id="4_obuh3"]
+[ext_resource type="Texture2D" uid="uid://ccanrktnnssxt" path="res://assets/player-frame4.png" id="5_bwclf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8k6ns"]
-radius = 7.0
+radius = 4.0
 height = 18.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xxql4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hamdl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kpnjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_obuh3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bwclf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 script = ExtResource("1_5kojs")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("2_hm0gl")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_8k6ns")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -28,3 +48,7 @@ zoom_sensitivity = 0.2
 
 [node name="Weapon" parent="." instance=ExtResource("4_35ins")]
 position = Vector2(0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_xxql4")
