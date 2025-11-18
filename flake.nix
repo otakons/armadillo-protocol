@@ -71,7 +71,7 @@
               cp work/build/* $out/
 
               cp ${coi-serviceworker} $out/coi-serviceworker.js
-              sed -i '/<\/body>/i <script src="coi-serviceworker.js"></script>' $out/game.html
+              sed -i '/<\/body>/i <script src="coi-serviceworker.js"></script>' $out/index.html
             '';
           };
 
