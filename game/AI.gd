@@ -23,6 +23,11 @@ func _ready() -> void:
 func _process(float):
 	if Input.is_action_just_pressed("ui_toggle_debug"):
 		debug = not debug
+		
+	if debug: _draw_debug_information()
+	
+func _draw_debug_information():
+	DebugDraw2D.circle(global_position, detection_radius, 64, Color(1.0, 0.0, 0.0, 0.275))
 
 func actor_setup():
 	await get_tree().physics_frame
