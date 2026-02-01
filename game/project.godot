@@ -15,6 +15,14 @@ run/main_scene="res://map.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DebugDraw2D="*res://addons/debugdraw2d/DebugDraw2D.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/debugdraw2d/plugin.cfg")
+
 [input]
 
 ui_left={
