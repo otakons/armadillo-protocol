@@ -3,6 +3,10 @@ extends CharacterBody2D
 ##Speed in pixels per second
 @export_range(0, 1000) var speed := 60
 @onready var _animation_player = $AnimatedSprite2D
+
+func _ready():
+	add_to_group("player")
+
 func _physics_process(_delta: float) -> void:
 	get_player_input()
 	move_and_slide()

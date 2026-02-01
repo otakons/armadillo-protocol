@@ -60,6 +60,9 @@ script = ExtResource("1_k0arh")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_mvf5p")
 animation = &"idle"
+frame_progress = 0.44378296
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_15qkx")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
