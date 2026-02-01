@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 @export_range(0, 100) var speed = 50
+@export_range(0, 500) var detection_radius = 200
 
 # Base walking speed where animation looks alright (at 5fps)
 const BASE_SPEED = 25.0
@@ -12,10 +13,16 @@ const BASE_SPEED = 25.0
 # TODO: Don't get first, get nearest instead. Shouldn't matter unless more stuff is considered a "player", eg. decoy etc.
 var player: CharacterBody2D
 
+var debug: bool = false
+
 func _ready() -> void:
 	actor_setup.call_deferred()
 		
 	nav.velocity_computed.connect(_velocity_computed)
+
+func _process(float):
+	if Input.is_action_just_pressed("ui_toggle_debug"):
+		debug = not debug
 
 func actor_setup():
 	await get_tree().physics_frame
@@ -33,6 +40,11 @@ func _physics_process(delta: float) -> void:
 func _move_towards_player():
 	if not player:
 		return
+		
+	if player.position.distance_to(global_position) > detection_radius:
+		_animation_player.play("idle")
+		return
+		
 	set_movement_target(player.position)
 	_face_towards_player()
 	

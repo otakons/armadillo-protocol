@@ -17,4 +17,4 @@ speed = 100
 
 [node name="GruntCharacter" parent="." instance=ExtResource("3_e0an3")]
 texture_filter = 1
-position = Vector2(379, 257)
+position = Vector2(494, 170)
