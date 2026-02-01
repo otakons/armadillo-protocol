@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://ch4nj0h07wrtt"]
 
-[ext_resource type="Script" path="res://player_character.gd" id="1_5kojs"]
-[ext_resource type="Texture2D" uid="uid://bouh618yq40xl" path="res://assets/player-frame1.png" id="2_hamdl"]
-[ext_resource type="Texture2D" uid="uid://dedln02rqfnnd" path="res://assets/player-frame2.png" id="3_kpnjr"]
-[ext_resource type="Script" path="res://camera_zoom.gd" id="3_nlxdy"]
+[ext_resource type="Script" uid="uid://bnf8pt50nhoc1" path="res://player_character.gd" id="1_5kojs"]
+[ext_resource type="Texture2D" uid="uid://bouh618yq40xl" path="res://assets/sprites/player/player-frame1.png" id="2_hamdl"]
+[ext_resource type="Texture2D" uid="uid://dedln02rqfnnd" path="res://assets/sprites/player/player-frame2.png" id="3_kpnjr"]
+[ext_resource type="Script" uid="uid://slfxvlf3e7cn" path="res://camera_zoom.gd" id="3_nlxdy"]
 [ext_resource type="PackedScene" uid="uid://b5pdo2fgujrj0" path="res://weapon.tscn" id="4_35ins"]
-[ext_resource type="Texture2D" uid="uid://m8nba71ir8kr" path="res://assets/player-frame3.png" id="4_obuh3"]
-[ext_resource type="Texture2D" uid="uid://ccanrktnnssxt" path="res://assets/player-frame4.png" id="5_bwclf"]
+[ext_resource type="Texture2D" uid="uid://m8nba71ir8kr" path="res://assets/sprites/player/player-frame3.png" id="4_obuh3"]
+[ext_resource type="Texture2D" uid="uid://ccanrktnnssxt" path="res://assets/sprites/player/player-frame4.png" id="5_bwclf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8k6ns"]
 radius = 4.0
@@ -33,6 +33,8 @@ animations = [{
 }]
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
+z_index = 50
+collision_layer = 2
 script = ExtResource("1_5kojs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
