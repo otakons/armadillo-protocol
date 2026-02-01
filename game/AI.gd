@@ -20,7 +20,7 @@ func _ready() -> void:
 		
 	nav.velocity_computed.connect(_velocity_computed)
 
-func _process(float):
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_toggle_debug"):
 		debug = not debug
 		
@@ -75,8 +75,8 @@ func _face_towards_player():
 	_animation_player.flip_h = flipped
 
 func _adjust_animation_speed():
-		var animation_multiplier = speed / BASE_SPEED
-		_animation_player.speed_scale = animation_multiplier
+	var animation_multiplier = speed / BASE_SPEED
+	_animation_player.speed_scale = animation_multiplier
 
 	
 func _velocity_computed(safe_velocity: Vector2):
