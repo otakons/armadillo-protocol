@@ -1,0 +1,44 @@
+name: Main Merge
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    strategy:
+      matrix:
+        include:
+          - platform: linux
+          - platform: web
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Build game
+        run: nix build .#${{ matrix.platform }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-${{ matrix.platform }}
+          path: result
+
+  publish-html:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Publish html5 version of the game
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download web artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts-web
+          path: ./build/
+      - name: Deploy html5 version of the game
+        with:
+          clean-exclude: pr-preview/
+          folder: ./build
